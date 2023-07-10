@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .card {
+      width: 200px;
+      height: 60px;
+      margin-right: 10px;
+      color: white;
+      text-align: center;
+      line-height: 60px;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div id="container"></div>
+
+  <script>
+    var container = document.getElementById('container');
+    var colors = [];
+    var red = 128;
+    var green = 128;
+    var blue = 0;
+    var step = 5;
+
+    while (blue <= 255) {
+      var color = 'rgb(' + red + ', ' + green + ', ' + blue + ')';
+      colors.push(color);
+      blue += step;
+    }
+
+    for (var i = 0; i < colors.length; i += 5) {
+      var row = document.createElement('div');
+      row.className = 'row';
+
+      for (var j = i; j < i + 5 && j < colors.length; j++) {
+        var div = document.createElement('div');
+        div.className = 'card';
+        div.style.backgroundColor = colors[j];
+        div.textContent = colors[j];
+        row.appendChild(div);
+      }
+
+      container.appendChild(row);
+    }
+  </script>
+</body>
+</html>

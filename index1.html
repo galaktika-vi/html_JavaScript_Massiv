@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .paragraph {
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div id="paragraphs-container"></div>
+
+  <script>
+    
+    var strings = ["Lorem ipsum dolor sit amet", "consectetur adipiscing elit", "sed do eiusmod tempor incididunt", "ut labore et dolore magna aliqua"];
+
+    
+    var container = document.getElementById('paragraphs-container');
+
+    
+    strings.forEach(function(string) {
+      var paragraph = document.createElement('p');
+      paragraph.textContent = string;
+      paragraph.classList.add('paragraph');
+
+     
+      paragraph.addEventListener('click', function() {
+        paragraph.textContent = '***';
+      });
+
+      
+      container.appendChild(paragraph);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .thumbnail-container {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+	.thumbnail {
+  width: 100px;
+  height: 100px;
+  margin: 0 10px;
+  cursor: pointer;
+}
+
+.selected-thumbnail {
+  border: 2px solid blue;
+}
+
+.preview {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 400px;
+  height: 400px;
+  margin: 0 auto;
+  border: 1px solid gray;
+}
+
+.preview img {
+  max-width: 100%;
+  max-height: 100%;
+}
+ </style>
+</head>
+<body>
+  <div class="thumbnail-container">
+    <img class="thumbnail" src="images/image1.jpg" alt="Image 1">
+    <img class="thumbnail" src="images/image2.jpg" alt="Image 2">
+    <img class="thumbnail" src="images/image3.jpg" alt="Image 3">
+
+    
+    
+  </div>
+  <div class="preview">
+     
+  </div>
+  <script>
+    var thumbnails = document.getElementsByClassName('thumbnail');
+    var preview = document.querySelector('.preview');
+
+    for (var i = 0; i < thumbnails.length; i++) {
+      thumbnails[i].addEventListener('click', function() {
+        
+        for (var j = 0; j < thumbnails.length; j++) {
+          thumbnails[j].classList.remove('selected-thumbnail');
+        }
+
+        
+        this.classList.add('selected-thumbnail');
+
+         
+        var imageUrl = this.src;
+
+       
+        preview.innerHTML = '<img src="' + imageUrl + '" alt="Preview">';
+      });
+    }
+  </script>
+</body>
+</html>

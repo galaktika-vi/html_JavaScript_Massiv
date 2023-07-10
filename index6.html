@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      background-color: #f5f5f5;
+    }
+	.card-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+}
+
+.card {
+  width: 200px;
+  height: 100px;
+  background-color: #fff;
+  text-align: center;
+  line-height: 100px;
+  font-size: 24px;
+  cursor: pointer;
+  margin: 0 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card p {
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+.card .hidden {
+  display: none;
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  margin: 0 5px;
+}
+ </style>
+</head>
+<body>
+  <div class="card-container">
+    <!-- Здесь будут карточки с текстом -->
+  </div>
+  <div class="buttons-container">
+    <button class="button ru-button">RU</button>
+    <button class="button en-button">EN</button>
+  </div>
+  <script>
+    var words = [
+      { en: 'apple', ru: 'яблоко' },
+      { en: 'car', ru: 'машина' },
+      { en: 'book', ru: 'книга' },
+      // Добавьте остальные слова
+    ];
+
+    var cardContainer = document.querySelector('.card-container');
+    var ruButton = document.querySelector('.ru-button');
+    var enButton = document.querySelector('.en-button');
+
+    var currentLanguage = 'ru'; // Изначально установлен русский язык
+
+    function updateCardsLanguage() {
+      var paragraphs = document.querySelectorAll('.card p');
+
+      paragraphs.forEach(function(paragraph) {
+        var card = paragraph.parentNode;
+
+        if (currentLanguage === 'ru') {
+          paragraph.textContent = words.find(function(word) {
+            return word.en === paragraph.textContent;
+          }).ru;
+        } else if (currentLanguage === 'en') {
+          paragraph.textContent = words.find(function(word) {
+            return word.ru === paragraph.textContent;
+          }).en;
+        }
+      });
+    }
+
+    words.slice(0, 3).forEach(function(word) {
+      var card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = '<p class="ru">' + word.ru + '</p><p class="en hidden">' + word.en + '</p>';
+
+      card.addEventListener('click', function() {
+        var ruParagraph = this.querySelector('.ru');
+        var enParagraph = this.querySelector('.en');
+
+        if (ruParagraph.classList.contains('hidden')) {
+          ruParagraph.classList.remove('hidden');
+          enParagraph.classList.add('hidden');
+        } else {
+          ruParagraph.classList.add('hidden');
+          enParagraph.classList.remove('hidden');
+        }
+      });
+
+      cardContainer.appendChild(card);
+    });
+
+    ruButton.addEventListener('click', function() {
+      currentLanguage = 'ru';
+      updateCardsLanguage();
+    });
+
+    enButton.addEventListener('click', function() {
+      currentLanguage = 'en';
+      updateCardsLanguage();
+    });
+
+    updateCardsLanguage(); // Обновляем язык карточек при загрузке страницы
+  </script>
+</body>
+</html>
